@@ -21,6 +21,7 @@ class MainApplication():
         plt.ylabel('Value')
         plt.xlabel('Jahr')
         plt.show()
+        print("neine")
 
 
 def main():
