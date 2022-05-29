@@ -1,8 +1,19 @@
+import countries
+
+
 class Station:
-    def __init__(self, city, reachable=False, station_to=None, lat=None, long=None):
+    def __init__(self, city, api_response):
         self.city = city
-        self.reachable = reachable
-        self.station_to = station_to
-        self.lat = lat
-        self.long = long
-        
+        if api_response['connections']:
+            connection = api_response['connections']
+            connection = connection[0]
+            self.reachable = True
+            self.station_to = connection['to']['station']['name']
+            self.lat = connection['to']['station']['coordinate']['x']
+            self.long = connection['to']['station']['coordinate']['y']
+
+        else:
+            self.reachable = False
+            self.station_to = None
+            self.lat = None
+            self.long = None

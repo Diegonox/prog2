@@ -35,17 +35,7 @@ class TrackCities:
         connections = []
         for city in self.cities:
             api_response = transport_api_service.get_connections(city_from, city)
-            station = Station(city)
-            if api_response['connections'] != []:
-                connection = api_response['connections']
-                connection = connection[0]
-                station.reachable = True
-                station.station_to = connection['to']['station']['name']
-                station.lat = connection['to']['station']['coordinate']['x']
-                station.long = connection['to']['station']['coordinate']['y']
-            else:
-                station.reachable = False
-
+            station = Station(city, api_response)
             connections.append(station)
 
         with open(f'../data/track_{city_from}.csv', 'w', newline="") as f:
@@ -56,7 +46,6 @@ class TrackCities:
                     [connection.city, connection.reachable, connection.station_to, connection.lat, connection.long])
 
     def update_track_file(self, from_city):
-
         '''
         creates a new dict with connections information and
         adds it to the existing track_file
@@ -81,5 +70,11 @@ class TrackCities:
 if __name__ == '__main__':
     t = TrackCities()
     t.create_track_file('Zürich')
+    t.create_track_file('Genf')
+    t.create_track_file('Bern')
+    t.create_track_file('Basel')
+    t.create_track_file('Luzern')
+    t.create_track_file('Thun')
+    t.create_track_file('Lugano')
     # reach_from_zürich = t.count_reachables('track_dict.json', 'Zürich')
     # print(reach_from_zürich)
