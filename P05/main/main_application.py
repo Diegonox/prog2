@@ -1,5 +1,5 @@
 import tkinter as tk
-from transport_api_service import TransportApiService
+from ..services.transport_api_service import TransportApiService
 
 """
 Main application with search interface. 

@@ -1,7 +1,9 @@
 import requests
+
 """
 Call transport.opendata.ch api to get the connections between two locations.
 """
+
 
 class TransportApiService:
     def __init__(self):
@@ -11,7 +13,7 @@ class TransportApiService:
             'from': '',
             'to': '',
         }
-    
+
     def get_connections(self, from_location, to_location):
         self.connections_api_params['from'] = from_location
         self.connections_api_params['to'] = to_location
