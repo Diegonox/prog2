@@ -22,7 +22,7 @@ class TransportApiService:
             'Hamburg','Konstanz','Ravensburg', 'Karlsruhe',
             'Arnhem','Amsterdam','Venlo','Den Haag',
             'Paris','Lyon','Marseille','Mühlhausen',
-            'Besançon','Grenoble','Nice','Charleroi',
+            'Besançon','Grenoble','Nice','Charleroi','Toulouse', 'Nancy',
             'London','Manchester','Liverpool','Birmingham','Leeds',
             'Prag',
             'Dublin','Belfast','Glasgow',
