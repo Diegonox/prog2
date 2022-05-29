@@ -35,7 +35,8 @@ class TrackCities:
         connections = []
         for city in self.cities:
             api_response = transport_api_service.get_connections(city_from, city)
-            station = Station(city, api_response)
+            station = Station(city)
+            station.set_station_by_api_response(api_response)
             connections.append(station)
 
         with open(f'../data/track_{city_from}.csv', 'w', newline="") as f:
