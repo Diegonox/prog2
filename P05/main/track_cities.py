@@ -3,9 +3,7 @@ import csv
 from models.station import Station
 from services.transport_api_service import TransportApiService
 
-"""
-Call transport.opendata.ch api to get the connections between two locations.
-"""
+__all__ = ['TrackCities']
 
 
 class TrackCities:
@@ -35,16 +33,18 @@ class TrackCities:
         connections = []
         for city in self.cities:
             api_response = transport_api_service.get_connections(city_from, city)
-            station = Station(city)
+            station = Station()
+            station.set_station_by_city(city)
             station.set_station_by_api_response(api_response)
             connections.append(station)
 
         with open(f'../data/track_{city_from}.csv', 'w', newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(['city', 'reachable', 'station_to', 'lat', 'long'])
+            writer.writerow(['city', 'country' 'reachable', 'station_to', 'lat', 'long'])
             for connection in connections:
                 writer.writerow(
-                    [connection.city, connection.reachable, connection.station_to, connection.lat, connection.long])
+                    [connection.city, connection.country, connection.reachable, connection.station_to,
+                     connection.lat, connection.long])
 
     def update_track_file(self, from_city):
         '''
@@ -74,8 +74,5 @@ if __name__ == '__main__':
     t.create_track_file('Genf')
     t.create_track_file('Bern')
     t.create_track_file('Basel')
-    t.create_track_file('Luzern')
-    t.create_track_file('Thun')
-    t.create_track_file('Lugano')
     # reach_from_zürich = t.count_reachables('track_dict.json', 'Zürich')
     # print(reach_from_zürich)

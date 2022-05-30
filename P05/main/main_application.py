@@ -1,16 +1,18 @@
 import tkinter as tk
-from ..services.transport_api_service import TransportApiService
+from services import TransportService
+from services.response_types import ERROR, DIRECT_CONNECTION, NO_DIRECT_CONNECTION
 
-"""
-Main application with search interface. 
-The interface asks the user's home location in Switzerland and the desired destination somewhere in the neighbouring countries.
-The application then calculates the shortest route between the two locations.
-"""
+__all__ = ['MainApplication']
 
 
 class MainApplication:
+    """
+    Main application with search interface.
+    The interface asks the user's home location in Switzerland and the desired destination somewhere in the neighbouring countries.
+    The application then calculates the shortest route between the two locations.
+    """
     def __init__(self):
-        self.transport_api_service = TransportApiService()
+        self.transport_service = TransportService()
         self.connections = []
         self.main()
 
@@ -37,10 +39,14 @@ class MainApplication:
         self.window.mainloop()
 
     def handle_click(self, event):
-        print("Button clicked")
-        self.connections = self.transport_api_service.get_connections(
+        response, response_type = self.transport_service.get_connections(
             self.start_location_input.get(), self.destination_input.get())
-        print(self.connections)
+        if response_type == DIRECT_CONNECTION:
+            pass
+        if response_type == NO_DIRECT_CONNECTION:
+            pass
+        if response_type == ERROR:
+            pass
 
 
 def main():
