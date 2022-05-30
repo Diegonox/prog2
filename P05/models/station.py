@@ -15,8 +15,8 @@ class Station:
         if json_response:
             self.set_station_by_city(json_response['name'])
             self.reachable = True
-            self.long = json_response['coordinate']['x']
-            self.lat = json_response['coordinate']['y']
+            self.long = json_response['coordinate']['y']
+            self.lat = json_response['coordinate']['x']
 
     def set_station_by_csv(self, csv_row):
         if csv_row:
@@ -34,7 +34,7 @@ class Station:
             self.city = city
             locator = Nominatim(user_agent='p05')
             location = locator.geocode(self.city)
-            self.country = location.address.split(',')[-1]
+            self.country = location.address.split(', ')[-1]
             self.lat = location.latitude
             self.long = location.longitude
 
@@ -44,5 +44,5 @@ class Station:
             connection = connection[0]
             self.reachable = True
             self.station_to = connection['to']['station']['name']
-            self.long = connection['to']['station']['coordinate']['x']
-            self.lat = connection['to']['station']['coordinate']['y']
+            self.long = connection['to']['station']['coordinate']['y']
+            self.lat = connection['to']['station']['coordinate']['x']

@@ -1,0 +1,54 @@
+city,country,reachable,station_to,lat,long
+Salzburg,Österreich,False,,47.7981346,13.0464806
+Graz,Österreich,False,,47.0708678,15.4382786
+Bregenz,Österreich,True,Bregenz,9.739635,47.503007
+Feldkirch,France,True,Feldkirch,9.604105,47.24098
+Dornbirn,Österreich,True,"Dornbirn, Bahnhof",9.738624,47.417043
+Vienne,Österreich,True,Vienne,4.874366,45.521088
+Frankfurt am Main,Deutschland,False,,50.1106444,8.6820917
+Köln,Deutschland,False,,50.938361,6.959974
+Wallhausen,Deutschland,True,"Wallhausen (KN), Hafen",9.135167,47.746823
+Ulm,Deutschland,True,Ulm Hbf,9.982193,48.399452
+Stuttgart Hbf,Deutschland,True,Stuttgart Hbf,9.181561,48.784087
+Freiburg im Breisgau,Deutschland,True,Freiburg im Breisgau,,
+Bodman-Ludwigshafen,Deutschland,True,Bodman-Ludwigshafen,,
+Hamburg,Deutschland,False,,53.550341,10.000654
+Konstanz,Deutschland,True,Konstanz,9.177301,47.658756
+Ravensburg,Deutschland,True,Ravensburg,9.606097,47.784488
+Karlsruhe,Deutschland,True,Karlsruhe Hbf,8.402133,48.993498
+Arnhem,Nederland,True,"BASF Agro B.V., Pfäffikon, Churerstr. 78",,
+Amsterdam,Nederland,False,,52.3727598,4.8936041
+Venlo,Nederland,False,,51.39244885,6.1511724144122955
+Den Haag,Nederland,False,,52.0799838,4.3113461
+Paris,France,True,Paris Gare de Lyon,2.373915,48.844997
+Lyon,France,True,Lyon Part Dieu,4.859965,45.76062
+Marseille,France,True,Marseille-Saint-Charles,5.381438,43.304062
+Mühlhausen,Deutschland,True,Mühlhausen (b Engen),8.804391,47.813659
+Besançon,France,True,Besançon Viotte,6.022024,47.247349
+Grenoble,France,True,Grenoble,5.714087,45.191238
+Nice,France,True,Nice-Ville,7.261687,43.704943
+Charleroi,België / Belgique / Belgien,False,,50.4120332,4.4436244
+London,United Kingdom,False,,51.5073219,-0.1276474
+Manchester,United Kingdom,False,,53.4794892,-2.2451148
+Liverpool,United Kingdom,False,,53.4071991,-2.99168
+Birmingham,United Kingdom,False,,52.4796992,-1.9026911
+Leeds,United Kingdom,False,,53.7974185,-1.5437941
+Prag,Česko,True,"Pragg, Bahnhof Furna",9.708949,46.93951
+Dublin,Éire / Ireland,False,,53.3497645,-6.2602732
+Belfast,United Kingdom,False,,54.596391,-5.9301829
+Glasgow,United Kingdom,False,,55.8609825,-4.2488787
+Cadaqués,España,False,,42.2893484,3.2752159
+Málaga,España,False,,36.7213028,-4.4216366
+Murcia,España,False,,37.9923795,-1.1305431
+Valencia,España,False,,39.4697065,-0.3763353
+Madrid,España,False,,40.4167047,-3.7035825
+Saragosa,España,False,,41.6521342,-0.8809428
+Barcelona,España,False,,41.3828939,2.1774322
+Bilbao,España,False,,43.2630018,-2.9350039
+Valladolid,España,False,,41.6521328,-4.728562
+Milano,Italia,True,Milano Centrale,9.204719,45.486396
+Bologna,Italia,False,,44.4938203,11.3426327
+Aosta,Italia,True,Aosta,7.322413,45.734208
+Domodossola,Italia,True,Domodossola (I),8.296238,46.115288
+como,Italia,True,Como S. Giovanni,9.072713,45.808969
+Varese,Italia,True,Varese,8.834588,45.819768

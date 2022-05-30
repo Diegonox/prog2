@@ -26,9 +26,12 @@ class TransportApiService:
             r = requests.get(self.location_api_url, params=self.location_api_params)
             r.raise_for_status()
             r.encoding = r.apparent_encoding
-            station = Station()
-            station.set_station_by_json(r.json()['stations'][0])
-            return station
+            try:
+                station = Station()
+                station.set_station_by_json(r.json()['stations'][0])
+                return station
+            except:
+                return None
         except requests.exceptions.HTTPError as err:
             print(err)
         except requests.exceptions.RequestException as e:

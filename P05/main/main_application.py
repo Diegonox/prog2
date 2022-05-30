@@ -11,6 +11,7 @@ class MainApplication:
     The interface asks the user's home location in Switzerland and the desired destination somewhere in the neighbouring countries.
     The application then calculates the shortest route between the two locations.
     """
+
     def __init__(self):
         self.transport_service = TransportService()
         self.connections = []
@@ -36,17 +37,25 @@ class MainApplication:
         )
         self.button.bind("<Button-1>", self.handle_click)
         self.button.pack()
+        self.direct_connection_label = tk.Label(text='')
+        self.error_label = tk.Label(text='')
         self.window.mainloop()
 
     def handle_click(self, event):
         response, response_type = self.transport_service.get_connections(
             self.start_location_input.get(), self.destination_input.get())
         if response_type == DIRECT_CONNECTION:
-            pass
+            direct_connection_string = ''
+            for connection in response:
+                direct_connection_string += f'{connection["from"]["station"]["name"]}: {connection["from"]["departure"]} ' \
+                                            f'- {connection["to"]["station"]["name"]}: {connection["to"]["arrival"]} | ({connection["duration"]})\n'
+            self.direct_connection_label.config(text=direct_connection_string)
+            self.direct_connection_label.pack()
         if response_type == NO_DIRECT_CONNECTION:
             pass
         if response_type == ERROR:
-            pass
+            self.error_label.config(text=response)
+            self.error_label.pack()
 
 
 def main():

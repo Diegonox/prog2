@@ -19,19 +19,19 @@ class TransportService:
         # if start doesn't exist return error
         start_location = start_location.title()
         destination_location = destination_location.title()
-        start_station = self.check_if_location_exists(start_location)
+        start_station = self.transport_api_service.get_station(start_location)
         if not start_station:
             return 'Start location does not exist', ERROR
 
-        destination_station = self.check_if_location_exists(destination_location)
-        if not destination_location:
+        destination_station = self.transport_api_service.get_station(destination_location)
+        if not destination_station:
             return 'Destination location does not exist', ERROR
 
         # query to transport api
         # if destination reachable api response
         connection = self.transport_api_service.get_connections(start_station.city, destination_station.city)
         if connection['connections']:
-            return connection, DIRECT_CONNECTION
+            return connection['connections'], DIRECT_CONNECTION
 
         # if no connections query subset calculator
         stations = self.get_stations_for_given_start_location_from_track_file(start_station)
@@ -39,9 +39,6 @@ class TransportService:
                                                                                                         start_station,
                                                                                                         destination_station)
         # if no connections query percentage travel
-
-    def check_if_location_exists(self, location):
-        return self.transport_api_service.get_station(location)
 
     @staticmethod
     def get_stations_for_given_start_location_from_track_file(start_station):
