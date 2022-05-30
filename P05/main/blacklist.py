@@ -2,8 +2,9 @@
 
 import csv
 from genericpath import exists
-
+# to do/think about:
 # the language of the blacklist should be defined or saved in different languages? 
+# the csv file should be saved in folder 'data'
 
 class BlackList:
 
@@ -24,7 +25,8 @@ class BlackList:
             writer = csv.writer(blacklist)
             writer.writerow([city, country])
 
-    def check_city(self, city): # checks if the city exists in the blacklist. 
+    def check_city(self, city): 
+        # checks if the city exists in the blacklist and returns True or False. 
         
         is_in_list = False
         cities = []
