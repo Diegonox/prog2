@@ -30,17 +30,18 @@ class TrackCities:
         reachable or unreachable
         '''
         transport_api_service = TransportApiService()
+        start_station = transport_api_service.get_station(city_from)
         connections = []
         for city in self.cities:
-            api_response = transport_api_service.get_connections(city_from, city)
+            api_response = transport_api_service.get_connections(start_station.city, city)
             station = Station()
             station.set_station_by_city(city)
             station.set_station_by_api_response(api_response)
             connections.append(station)
 
-        with open(f'../data/track_{city_from}.csv', 'w', newline="") as f:
+        with open(f'../data/track_{start_station.city}.csv', 'w', newline="", encoding='utf8') as f:
             writer = csv.writer(f)
-            writer.writerow(['city', 'country' 'reachable', 'station_to', 'lat', 'long'])
+            writer.writerow(['city', 'country', 'reachable', 'station_to', 'lat', 'long'])
             for connection in connections:
                 writer.writerow(
                     [connection.city, connection.country, connection.reachable, connection.station_to,
@@ -54,7 +55,7 @@ class TrackCities:
         '''
 
     def count_reachables(self, track_dict: str, home_location):
-        with open(track_dict, 'r') as f:
+        with open(track_dict, 'r', encoding='utf8') as f:
             j_object = json.loads(f.read())
             part = j_object[home_location]
             count_reach = 0

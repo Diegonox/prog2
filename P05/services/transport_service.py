@@ -19,32 +19,36 @@ class TransportService:
         # if start doesn't exist return error
         start_location = start_location.title()
         destination_location = destination_location.title()
-        if not self.check_if_location_exists(start_location):
+        start_station = self.check_if_location_exists(start_location)
+        if not start_station:
             return 'Start location does not exist', ERROR
-        if not self.check_if_location_exists(destination_location):
+
+        destination_station = self.check_if_location_exists(destination_location)
+        if not destination_location:
             return 'Destination location does not exist', ERROR
 
         # query to transport api
         # if destination reachable api response
-        if connection := self.transport_api_service.get_connections(start_location, destination_location):
+        connection = self.transport_api_service.get_connections(start_station.city, destination_station.city)
+        if connection['connections']:
             return connection, DIRECT_CONNECTION
+
         # if no connections query subset calculator
-        stations = self.get_stations_for_given_start_location_from_track_file(start_location)
+        stations = self.get_stations_for_given_start_location_from_track_file(start_station)
         reachable_stations = self.subset_calculator.get_subset_stations_for_given_start_and_destination(stations,
-                                                                                                        start_location,
-                                                                                                        destination_location)
+                                                                                                        start_station,
+                                                                                                        destination_station)
         # if no connections query percentage travel
 
     def check_if_location_exists(self, location):
-        if self.transport_api_service.get_location(location):
-            return True
-        return False
+        return self.transport_api_service.get_station(location)
 
     @staticmethod
-    def get_stations_for_given_start_location_from_track_file(start_location):
+    def get_stations_for_given_start_location_from_track_file(start_station):
         stations = []
-        with open(f'track_{start_location}.csv', 'r') as f:
+        with open(f'../data/track_{start_station.city}.csv', 'r', encoding='utf8') as f:
             reader = csv.reader(f)
+            next(reader)
             for row in reader:
                 station = Station()
                 station.set_station_by_csv(row)

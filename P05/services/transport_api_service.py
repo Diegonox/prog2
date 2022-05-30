@@ -2,6 +2,8 @@ import requests
 
 __all__ = ['TransportApiService']
 
+from models import Station
+
 
 class TransportApiService:
     """
@@ -18,12 +20,15 @@ class TransportApiService:
             'to': '',
         }
 
-    def get_location(self, location):
+    def get_station(self, location):
         self.location_api_params['query'] = location
         try:
             r = requests.get(self.location_api_url, params=self.location_api_params)
             r.raise_for_status()
-            return r.json()
+            r.encoding = r.apparent_encoding
+            station = Station()
+            station.set_station_by_json(r.json()['stations'][0])
+            return station
         except requests.exceptions.HTTPError as err:
             print(err)
         except requests.exceptions.RequestException as e:
@@ -36,6 +41,7 @@ class TransportApiService:
         try:
             r = requests.get(self.connections_api_url, params=self.connections_api_params)
             r.raise_for_status()
+            r.encoding = r.apparent_encoding
             return r.json()
         except requests.exceptions.HTTPError as err:
             print(err)

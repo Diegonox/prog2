@@ -23,7 +23,7 @@ class SubsetCalculator:
             math.atan2(destination.lat - start.lat, destination.long - start.long))
 
         for station in stations:
-            if station.reachable:
+            if station.reachable and station.lat and station.long:
                 station_dest_angle = math.degrees(math.atan2(station.lat - start.lat, station.long - start.long))
                 if abs(station_dest_angle - start_dest_angle) <= 20:
                     reachable_stations.append(station)
