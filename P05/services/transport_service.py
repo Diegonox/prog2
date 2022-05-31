@@ -1,3 +1,7 @@
+"""
+@author: Diego Fontana
+"""
+
 import csv
 import os
 

@@ -1,3 +1,7 @@
+"""
+@author: Diego Fontana
+"""
+
 import math
 from typing import List
 from models.station import Station

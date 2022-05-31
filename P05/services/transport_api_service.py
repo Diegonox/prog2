@@ -1,3 +1,7 @@
+"""
+@author: Diego Fontana
+"""
+
 import requests
 from models import Station
 

@@ -1,8 +1,10 @@
+"""
+@author: Diego Fontana
+"""
 import tkinter as tk
 from services import TransportService
 from services.response_types import ERROR, DIRECT_CONNECTION, NO_DIRECT_CONNECTION
 from blacklist import BlackList
-from services.subset_calculator import SubsetCalculator
 
 __all__ = ['MainApplication']
 

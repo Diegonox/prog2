@@ -1,3 +1,7 @@
+"""
+@author: Diego Fontana
+"""
+
 from geopy import Nominatim
 
 __all__ = ['Station']

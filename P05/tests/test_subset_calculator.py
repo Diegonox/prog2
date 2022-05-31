@@ -1,5 +1,9 @@
+"""
+@author: Diego Fontana
+"""
+
 import unittest
-from ..services.subset_calculator import SubsetCalculator
+from services.subset_calculator import SubsetCalculator
 from models.station import Station
 
 
@@ -8,6 +12,7 @@ class TestSubsetCalculator(unittest.TestCase):
     def test_calculator(self):
         station1 = Station()
         station1.city = 'Frankfurt'
+        station1.reachable = True
         station1.lat = 1
         station1.long = 0.5
         station2 = Station()
