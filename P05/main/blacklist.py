@@ -1,4 +1,6 @@
-
+"""
+@author: Oscar Echeverry
+"""
 
 import csv
 from genericpath import exists
