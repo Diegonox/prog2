@@ -39,6 +39,7 @@ class TransportService:
                                                                                                         destination_station)
         return reachable_stations, NO_DIRECT_CONNECTION
         # if no connections query percentage travel
+       stats = calculate_closest_location(reachable_stations, destination_location)
 
     @staticmethod
     def get_stations_for_given_start_location_from_track_file(start_station):
