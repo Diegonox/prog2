@@ -3,4 +3,15 @@ Germany;https://www.bahn.de/
 Austria;https://www.oebb.at/
 Italy;https://www.trenitalia.com/de.html
 Belgium;https://www.belgiantrain.be/de
-Netherlands;https://www.connexxion.nl/de/fahrkarten
+'Netherlands': 'https://www.connexxion.nl/de/fahrkarten'
+try:
+   link = searchlinks[stations.country]
+except KeyError:
+   pass
+
+searchlinks = {'Niederlände': 'https://www.connexxion.nl/de/fahrkarten',
+'Spanien':'https://www.renfe.com/es/es',
+'Deutschland': 'https://www.bahn.de/',
+'Österreich':'https://www.oebb.at/',
+'Italien': 'https://www.trenitalia.com/de.html',
+'Belgien' : 'https://www.belgiantrain.be/de'}
