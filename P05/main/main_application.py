@@ -38,6 +38,7 @@ class MainApplication:
         self.button.bind("<Button-1>", self.handle_click)
         self.button.pack()
         self.direct_connection_label = tk.Label(text='')
+        self.no_direct_connection_label = tk.Label(text='')
         self.error_label = tk.Label(text='')
         self.window.mainloop()
 
@@ -52,7 +53,13 @@ class MainApplication:
             self.direct_connection_label.config(text=direct_connection_string)
             self.direct_connection_label.pack()
         if response_type == NO_DIRECT_CONNECTION:
-            pass
+            no_direct_connection_string = 'We are able to suggest connections to the following stations in your direction: \n'
+            for section in response:
+                no_direct_connection_string += f'{section}\n'
+            self.no_direct_connection_label.config(text=no_direct_connection_string)
+            self.no_direct_connection_label.pack()
+            # percentage traveled muss be calculated
+
         if response_type == ERROR:
             self.error_label.config(text=response)
             self.error_label.pack()
