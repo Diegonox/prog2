@@ -1,6 +1,4 @@
 import csv
-from tkinter import N
-
 from models import Station
 from .response_types import ERROR, DIRECT_CONNECTION, NO_DIRECT_CONNECTION
 from .transport_api_service import TransportApiService
@@ -39,7 +37,7 @@ class TransportService:
         reachable_stations = self.subset_calculator.get_subset_stations_for_given_start_and_destination(stations,
                                                                                                         start_station,
                                                                                                         destination_station)
-        return  reachable_stations, NO_DIRECT_CONNECTION
+        return reachable_stations, NO_DIRECT_CONNECTION
         # if no connections query percentage travel
 
     @staticmethod

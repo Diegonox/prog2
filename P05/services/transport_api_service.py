@@ -1,8 +1,7 @@
 import requests
+from models import Station
 
 __all__ = ['TransportApiService']
-
-from models import Station
 
 
 class TransportApiService:
