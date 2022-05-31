@@ -44,5 +44,5 @@ class Station:
             connection = connection[0]
             self.reachable = True
             self.station_to = connection['to']['station']['name']
-            self.long = connection['to']['station']['coordinate']['y']
-            self.lat = connection['to']['station']['coordinate']['x']
+            self.lat = connection['to']['station']['coordinate']['y']
+            self.long = connection['to']['station']['coordinate']['x']
