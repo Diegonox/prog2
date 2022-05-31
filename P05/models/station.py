@@ -1,5 +1,6 @@
 from geopy import Nominatim
 
+__all__ = ['Station']
 
 class Station:
     def __init__(self):
