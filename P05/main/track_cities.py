@@ -25,7 +25,7 @@ class TrackCities:
 
     def create_track_file(self, city_from):
         '''
-        creates a json file called 'track_dict' with the connections from the 
+        creates a json file called  track_csv, with the connections from the 
         city_from to the cities in the list cities and defines the access as 
         reachable or unreachable
         '''
@@ -54,8 +54,8 @@ class TrackCities:
         to be completed
         '''
 
-    def count_reachables(self, track_dict: str, home_location):
-        with open(track_dict, 'r', encoding='utf8') as f:
+    def count_reachables(self, track_csv, home_location):
+        with open (track_csv, 'r', encoding='utf8') as f:
             j_object = json.loads(f.read())
             part = j_object[home_location]
             count_reach = 0
@@ -75,5 +75,5 @@ if __name__ == '__main__':
     t.create_track_file('Genf')
     t.create_track_file('Bern')
     t.create_track_file('Basel')
-    # reach_from_zürich = t.count_reachables('track_dict.json', 'Zürich')
+    # reach_from_zürich = t.count_reachables( track_csv,json', 'Zürich')
     # print(reach_from_zürich)
