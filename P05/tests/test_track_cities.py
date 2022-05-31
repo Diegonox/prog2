@@ -22,10 +22,10 @@ class TestTrackCities(unittest.TestCase):
                        'Milano', 'Bologna', 'Aosta', 'Domodossola', 'como', 'Varese']
 
         self.city_from = 'Zurich'
+        self.track = TrackCities()
+        self.count = self.track.count_reachables()
 
-
-        self.assertEqual()
-        self.assertEqual()
+        self.assertEqual(self.count, 25)
         
 
 if __name__ == '__main__':
