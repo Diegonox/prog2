@@ -23,7 +23,10 @@ class Station:
         if csv_row:
             self.city = csv_row[0]
             self.country = csv_row[1]
-            self.reachable = csv_row[2]
+            if csv_row[2] == 'True':
+                self.reachable = True
+            else:
+                self.reachable = False
             self.station_to = csv_row[3]
             if csv_row[4]:
                 self.lat = float(csv_row[4])

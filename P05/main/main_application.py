@@ -59,7 +59,9 @@ class MainApplication:
             self.no_direct_connection_label.config(text=no_direct_connection_string)
             self.no_direct_connection_label.pack()
             '''
-
+        self.direct_connection_label.config(text='')
+        self.no_direct_connection_label.config(text='')
+        self.error_label.config(text='')
         response, response_type = self.transport_service.get_connections(
             self.start_location_input.get(), self.destination_input.get())
         if response_type == DIRECT_CONNECTION:
@@ -70,15 +72,11 @@ class MainApplication:
             self.direct_connection_label.config(text=direct_connection_string)
             self.direct_connection_label.pack()
         if response_type == NO_DIRECT_CONNECTION:
-            no_direct_connection_string = 'We are able to suggest connections to the following stations in your direction: \n'
-            for section in response:
-                no_direct_connection_string += f'{section}\n'
+            no_direct_connection_string = 'We are only able to suggest the following connection: \n'
+            no_direct_connection_string += response
             self.no_direct_connection_label.config(text=no_direct_connection_string)
             self.no_direct_connection_label.pack()
-            #insert destination in blacklist
             self.black_list.insert_city(self.start_location_input, 'country') #country must be generated
-            # percentage traveled muss be calculated
-
         if response_type == ERROR:
             self.error_label.config(text=response)
             self.error_label.pack()

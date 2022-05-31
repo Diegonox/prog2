@@ -13,58 +13,40 @@ Created on Sun May 29 14:41:04 2022
 import requests
 import geopy.distance
 
-r = requests.get('http://transport.opendata.ch/v1/connections?from=Lausanne&to=zurich')
-loc = r.json()
-starting = loc['from']['coordinate']
-start_x = starting['x']
-start_y = starting['y']
 
-ending = loc['to']['coordinate']
-end_x = ending['x']
-end_y = ending['y']
+class DistanceCalculator:
 
+    def calculate_closest_location(self, reachable_stations, destination_station, start_station):
+        closest_distance = 200000000
+        closest_station = None
+        destination_coord = (destination_station.long, destination_station.lat)
+        total_distance = (geopy.distance.geodesic((start_station.long, start_station.lat), destination_coord).km)
+        for station in reachable_stations:
 
-class Calculator():
+            # calculate closest reachable station
+            temp_coord = (station.long, station.lat)
+            temp_distance = (geopy.distance.geodesic(temp_coord, destination_coord).km)
+            if station and temp_distance < closest_distance:
+                closest_distance = temp_distance
+                closest_station = station
 
-    def __init__(self):
-        pass
+        return self.calculate_percent_and_time(total_distance,closest_station, start_station)
 
-    def calculate_closest_location(reachable_stations, destination):
-        self.closest_distance = 2000
-
-    for stations in reachable_stations:
-
-        # calculate closest reachable station
-        self.coords_1 = (self.start_x, self.start_y)
-        self.coords_2 = (destination_x, destination_y)
-        self.total_distance = (geopy.distance.geodesic(self.coords_1, self.coords_2).km)
-        if self.total_distance < self.closest_distance:
-            self.closest_distance = self.total_distance
-            coords = self.coords_1
-            name = reachable_stations['name']
-
-        else:
-            pass
-        return calculate_closest_location(self, name, coords)
-
-    def calculate_percent_and_time(self, name, coords):
-        self.coords_1 = (start_x, start_y)
-        self.coords_2 = coords
-        self.reachable_distance = (geopy.distance.geodesic(self.coords_1, self.coords_2).km)
+    def calculate_percent_and_time(self,total_distance ,closest_station, start_station):
+        coords_1 = (start_station.long,start_station.lat)
+        coords_2 = (closest_station.long,closest_station.lat)
+        reachable_distance = (geopy.distance.geodesic(coords_1,coords_2).km)
         # calculate how much of the way has been reached through our app
-        self.percent = (self.total_distance / 100) / self.reachable_distance
-        duration = travel_time(start, name)
-        return self.percent, name, self.duration
+        percent = round((reachable_distance/total_distance) * 100, 2)
+        duration = self.travel_time(start_station.city,closest_station.city)
+        return f'Closest Location to your final Destination:{closest_station.city}\n' \
+               f'{percent}% of the way travelled\n' \
+               f'Duration:  {duration}'
 
 
-def travel_time(self, start, name):
-    link = 'http://transport.opendata.ch/v1/connections?from=', start, '&to=', name)
-    r = requests.get(link)
-    loc = r.json()
-    self.duration = loc['connections'][0]['duration']
-    return self.duration
+    def travel_time(self, start_station, closest_station):
+        link = f'http://transport.opendata.ch/v1/connections?from={start_station}&to={closest_station}'
+        r = requests.get(link)
+        loc = r.json()
+        return loc['connections'][0]['duration']
 
-
-if __name__ == '__main__':
-    Calculator.calculate_distance()
-    Calculator.travel_time()
