@@ -1,6 +1,8 @@
 import tkinter as tk
 from services import TransportService
 from services.response_types import ERROR, DIRECT_CONNECTION, NO_DIRECT_CONNECTION
+from blacklist import BlackList
+from services.subset_calculator import SubsetCalculator
 
 __all__ = ['MainApplication']
 
@@ -18,6 +20,7 @@ class MainApplication:
         self.main()
 
     def main(self):
+        self.black_list = BlackList()
         self.window = tk.Tk()
 
         self.start_location_label = tk.Label(text="Von")
@@ -43,6 +46,20 @@ class MainApplication:
         self.window.mainloop()
 
     def handle_click(self, event):
+        '''
+
+        if self.black_list.check_city(self.destination_input):
+            stations = TransportService().get_stations_for_given_start_location_from_track_file(self.destination_input)
+            reachable_stations = SubsetCalculator().get_subset_stations_for_given_start_and_destination(stations,
+                                                                                                        self.start_location_input,
+                                                                                                        self.destination_input)
+            no_direct_connection_string = 'We are able to suggest connections to the following stations in your direction: \n'
+            for station in reachable_stations:
+                no_direct_connection_string += f'{section}\n'
+            self.no_direct_connection_label.config(text=no_direct_connection_string)
+            self.no_direct_connection_label.pack()
+            '''
+
         response, response_type = self.transport_service.get_connections(
             self.start_location_input.get(), self.destination_input.get())
         if response_type == DIRECT_CONNECTION:
@@ -58,6 +75,8 @@ class MainApplication:
                 no_direct_connection_string += f'{section}\n'
             self.no_direct_connection_label.config(text=no_direct_connection_string)
             self.no_direct_connection_label.pack()
+            #insert destination in blacklist
+            self.black_list.insert_city(self.start_location_input, 'country') #country must be generated
             # percentage traveled muss be calculated
 
         if response_type == ERROR:
